@@ -9,7 +9,7 @@ using System.IO;
 
 namespace Base_C_Lesson_4
 {
-    class Program
+    partial class Program
     {
         static void Main(string[] args)
         {
@@ -20,7 +20,10 @@ namespace Base_C_Lesson_4
             //Task2();
 
             // Задача 3.
-            Task3();
+            //Task3();
+
+            // Задача 4.
+            Task4();
         }
 
         /*
@@ -161,6 +164,53 @@ namespace Base_C_Lesson_4
                 Console.WriteLine("\n"+ info.Key+ " = "+info.Value+" раз.");
             }
             //////
+
+            Console.ReadKey();
+        }
+
+        /*
+                *  Задание 3.
+                а) Дописать класс для работы с одномерным массивом.Реализовать конструктор, создающий массив определенного размера и заполняющий массив числами от начального значения с заданным шагом.Создать свойство Sum, которое возвращает сумму элементов массива, метод Inverse, возвращающий новый массив с измененными знаками у всех элементов массива(старый массив, остается без изменений),  метод Multi, умножающий каждый элемент массива на определённое число, свойство MaxCount, возвращающее количество максимальных элементов.
+                б)** Создать библиотеку содержащую класс для работы с массивом.Продемонстрировать работу библиотеки
+                в) *** Подсчитать частоту вхождения каждого элемента в массив(коллекция Dictionary<int, int>)
+                */
+        static void Task4()
+        {
+            Console.Write("\n------------------------------------------------------\n");
+            string description = "Задание 4\n";
+            description += "Решить задачу с логинами из урока 2, только логины и пароли считать из файла в массив. Создайте структуру Account, содержащую Login и Password.\n";
+            Console.Write(description);
+            Console.Write("------------------------------------------------------\n");
+
+            // Создаем структуру-базу данных
+            string db_file = "accounts.txt";
+            var a = new Account();
+            try
+            {
+                // Попытка получить данные из базы (файл)
+                a.LoadFromFile(db_file);
+
+                // Проверяем ввод пользователя
+                Console.WriteLine("Введите логин:");
+                string login = Console.ReadLine();
+                Console.WriteLine("Введите пароль:");
+                string password = Console.ReadLine();
+                // Проверяем
+                if (a.Auth(login, password))
+                {
+                    Console.WriteLine("Авторизация прошла успешно!");
+                }
+                else
+                {
+                    Console.WriteLine("Авторизация НЕ прошла!");
+                }
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
 
             Console.ReadKey();
         }

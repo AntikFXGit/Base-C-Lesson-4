@@ -1,0 +1,10 @@
+C:\Users\Ant1K\Documents\GitHub\Base-C-Lesson-4\Base-C-Lesson-4\bin\Debug\Base-C-Lesson-4.exe.config
+C:\Users\Ant1K\Documents\GitHub\Base-C-Lesson-4\Base-C-Lesson-4\bin\Debug\Base-C-Lesson-4.exe
+C:\Users\Ant1K\Documents\GitHub\Base-C-Lesson-4\Base-C-Lesson-4\bin\Debug\Base-C-Lesson-4.pdb
+C:\Users\Ant1K\Documents\GitHub\Base-C-Lesson-4\Base-C-Lesson-4\obj\Debug\Base-C-Lesson-4.csprojAssemblyReference.cache
+C:\Users\Ant1K\Documents\GitHub\Base-C-Lesson-4\Base-C-Lesson-4\obj\Debug\Base-C-Lesson-4.csproj.CoreCompileInputs.cache
+C:\Users\Ant1K\Documents\GitHub\Base-C-Lesson-4\Base-C-Lesson-4\obj\Debug\Base-C-Lesson-4.csproj.CopyComplete
+C:\Users\Ant1K\Documents\GitHub\Base-C-Lesson-4\Base-C-Lesson-4\obj\Debug\Base-C-Lesson-4.exe
+C:\Users\Ant1K\Documents\GitHub\Base-C-Lesson-4\Base-C-Lesson-4\obj\Debug\Base-C-Lesson-4.pdb
+C:\Users\Ant1K\Documents\GitHub\Base-C-Lesson-4\Base-C-Lesson-4\bin\Debug\MyArrayLib.dll
+C:\Users\Ant1K\Documents\GitHub\Base-C-Lesson-4\Base-C-Lesson-4\bin\Debug\MyArrayLib.pdb

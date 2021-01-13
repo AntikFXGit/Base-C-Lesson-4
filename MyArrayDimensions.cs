@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+
 namespace Base_C_Lesson_4
 {
     class MyArrayDimensions
@@ -25,6 +27,18 @@ namespace Base_C_Lesson_4
             Init(rows);
             if (cntFill>0) Fill(cntFill);
         }
+
+        public MyArrayDimensions()
+        {
+            try
+            {
+                LoadFromFile("array.txt");
+            } catch(Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
 
         // Инициализация массива
         public void Init(int rows)
@@ -88,9 +102,9 @@ namespace Base_C_Lesson_4
                     if(maxValue < arr[r,i])
                     {
                         maxValue = arr[r, i];
-                        idx[0] = r;
-                        idx[1] = i;
-                        idx[2] = maxValue;
+                        idx[0] = r; // номер измерения
+                        idx[1] = i; // индекс 
+                        idx[2] = maxValue; // число
                     }
                 }
             }
@@ -137,51 +151,86 @@ namespace Base_C_Lesson_4
             }
             result = idx;
         }
-        
 
-
-
-
-        /*
-        public MyArray Inverse()
+        public void Add(int r, int i, int value)
         {
-            var a = new MyArray(Count);
-            for (int i = 0; i < Count; i++) a[i] = array[i] * -1;
-            return a;
+            checkMemory(i);
+            array[r, i] = value;
         }
 
-        public void Multi(int number)
+        public void SaveToFile(string file)
         {
-            for (int i = 0; i < Count; i++) array[i] *= number;
-        }
-
-        public int Add(int value)
-        {
-            array[Count] = value;
-            Count++;
-            return Count;
-        }
-
-        // Частота вхождения
-        public Dictionary<int, int> Freq()
-        {
-            var a = new Dictionary<int, int>();
-            for (int i = 0; i < Count; i++)
+            string text = "";
+            for (int r = 0; r < array.GetLength(0); r++)
             {
-                if (a.ContainsKey(array[i])) a[array[i]] += 1; else a[array[i]] = 1;
+                if (r > 0) text +="\n";
+                string elems = "";
+                for (int i = 0; i < array.GetLength(1); i++)
+                {
+                    elems += ","+ array[r,i].ToString();
+                }
+                elems = elems.Substring(1);
+                text += elems;
             }
-            return a;
+
+            // Save data into file
+            string fPath = "./" + file;
+            using (StreamWriter sw = new StreamWriter(fPath, false, System.Text.Encoding.Default))
+            {
+                sw.WriteLine(text);
+            }
         }
 
-        public string toString(string sep = ",")
+
+        public void LoadFromFile(string file)
         {
-            string result = "";
-            for (int i = 0; i < this.Count; i++) result += ", " + array[i];
-            if (result != "") result = result.Substring(2);
-            return result;
+            // Строки - измерения
+            // Перечисления - элементы в каждом измерении
+
+            // 0. Проверка на существование файла
+            if (File.Exists(file))
+            {
+                // 1. Смотрим сколько строк (измерений) в файле
+                string fPath = "./" + file;
+                using (StreamReader sr = new StreamReader(fPath, System.Text.Encoding.Default))
+                {
+                    string line;
+                    List<string> lines = new List<string>();
+                    while ((line = sr.ReadLine()) != null) lines.Add(line);
+
+                    // 2. Заполняем массив
+                    var a = new MyArrayDimensions(lines.Count, 0);
+                    for(int r=0; r< lines.Count; r++)
+                    {
+                        // Разбиваем на элементы
+                        string[] elems = lines[r].Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+                        for(int i=0; i<elems.Length; i++)
+                        {
+                            int val = int.Parse(elems[i]);
+                            a.Add(r, i, val);
+                            // Считаем мин и макс значения
+                            if (val > maxValue) maxValue = val;
+                            if (val < minValue || minValue == 0) minValue = val;
+                        }
+                    }
+                    array = a.GetArray();
+                }
+            }
+            else
+            {
+                throw new Exception("Файл (" + file + ") не найден.");
+            }
+            
+
+
         }
 
-        */
+
+
+
+
+
+
 
 
     }

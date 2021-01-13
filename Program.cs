@@ -234,33 +234,43 @@ namespace Base_C_Lesson_4
             Console.Write(description);
             Console.Write("------------------------------------------------------\n");
 
-
+           
             // Создаем многомерный массив
-            var a = new MyArrayDimensions(4, 5);
+            try
+            {
+                var a = new MyArrayDimensions(4, 5); // создаем новый и заполняем случайными числами
+                //var a = new MyArrayDimensions(); // пытаемся получить из файла (нет проверки на целостность и корректность данных, берем за основу что доступ к файлу для ручной правки - нет)
 
-            // Демонстрация работы каждого метода из класса Myarray
-            Console.WriteLine("\nРезультат:");
-            Console.WriteLine("\nСумма: " + a.Sum().ToString());
-            Console.WriteLine("\nСумма (числа больше 500): " + a.Sum(500).ToString());
+                // Демонстрация работы каждого метода из класса Myarray
+                Console.WriteLine("\nРезультат:");
+                Console.WriteLine("\nСумма: " + a.Sum().ToString());
+                Console.WriteLine("\nСумма (числа больше 500): " + a.Sum(500).ToString());
 
-            // Получаем доступ к массиву
-            var arr = a.GetArray();
+                // Получаем доступ к массиву
+                var arr = a.GetArray();
 
-            // Номер максимального элемента массива
-            int[] maxValueIdx;
+                // Номер максимального элемента массива
+                int[] maxValueIdx;
 
-            // 3 варианта поиска через передачу параметра, ссылки и результата (out)
-            Console.WriteLine("\nИндекс максимального числа:");
-            maxValueIdx = a.MaxValueIdxParam(arr);
-            Console.WriteLine("\nЧерез параметр - Row:"+ maxValueIdx[0].ToString() + ", Idx: "+ maxValueIdx[1].ToString()+", Number: "+ maxValueIdx[2].ToString());
-            
-            maxValueIdx = a.MaxValueIdxRef(ref arr);
-            Console.WriteLine("\nЧерез REF - Row:" + maxValueIdx[0].ToString() + ", Idx: " + maxValueIdx[1].ToString() + ", Number: " + maxValueIdx[2].ToString());
-            
-            a.MaxValueIdxOut(arr, out maxValueIdx);
-            Console.WriteLine("\nЧерез OUT - Row:" + maxValueIdx[0].ToString() + ", Idx: " + maxValueIdx[1].ToString() + ", Number: " + maxValueIdx[2].ToString());
+                // 3 варианта поиска через передачу параметра, ссылки и результата (out)
+                Console.WriteLine("\nИндекс максимального числа:");
+                maxValueIdx = a.MaxValueIdxParam(arr);
+                Console.WriteLine("\nЧерез параметр - Row:" + maxValueIdx[0].ToString() + ", Idx: " + maxValueIdx[1].ToString() + ", Number: " + maxValueIdx[2].ToString());
 
+                maxValueIdx = a.MaxValueIdxRef(ref arr);
+                Console.WriteLine("\nЧерез REF - Row:" + maxValueIdx[0].ToString() + ", Idx: " + maxValueIdx[1].ToString() + ", Number: " + maxValueIdx[2].ToString());
 
+                a.MaxValueIdxOut(arr, out maxValueIdx);
+                Console.WriteLine("\nЧерез OUT - Row:" + maxValueIdx[0].ToString() + ", Idx: " + maxValueIdx[1].ToString() + ", Number: " + maxValueIdx[2].ToString());
+
+                // Сохраняем массив в файл
+                a.SaveToFile("array.txt");
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
             Console.ReadKey();
         }
     }
